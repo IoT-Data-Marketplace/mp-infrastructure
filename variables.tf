@@ -11,3 +11,5 @@ variable "vpn_config" {
     client_cidr_block          = string
   })
 }
+
+variable "ssh_public_key" {}

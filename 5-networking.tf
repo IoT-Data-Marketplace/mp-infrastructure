@@ -58,3 +58,12 @@ resource "aws_ec2_client_vpn_network_association" "vpn_network_association" {
   client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.client_vpn_endpoint.id
   subnet_id              = each.key
 }
+
+resource "aws_key_pair" "deployer" {
+  key_name   = format("%s-ssh-key-pair", local.vpc_config.name)
+  public_key = var.ssh_public_key
+
+  tags = {
+    "Region" = local.aws_region
+  }
+}
