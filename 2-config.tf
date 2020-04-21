@@ -56,14 +56,9 @@ locals {
   }
 
   namespaces = {
-    kafka = {
-      install_efs_pvc = true
+    mt-system = {
     }
-    logging = {
-      install_efs_pvc = false
-    }
-    monitoring = {
-      install_efs_pvc = false
+    mt-logging = {
     }
   }
 

@@ -34,3 +34,22 @@ module "cluster_sg" {
     }
   }
 }
+
+module "worker_nodes_sg" {
+  source      = "./modules/security-group"
+  description = "SG Attached to the EKS Worker Nodes"
+  sg_name     = format("%s-cluster-workers-sg-%s", local.cluster_config.cluster_name, local.aws_region)
+  vpc_id      = module.vpc.vpc_id
+  allow_icmp  = true
+  aws_region  = local.aws_region
+  ingress_cidr_block_rules = {
+    node-access-from-vpc = {
+      from_port = 0
+      to_port   = 0
+      protocol  = "-1"
+      cidr_blocks = [
+        local.vpc_config.cidr
+      ]
+    }
+  }
+}
