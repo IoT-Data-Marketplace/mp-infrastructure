@@ -28,37 +28,32 @@ module "vpc" {
   )
 }
 
-resource "aws_ec2_client_vpn_endpoint" "client_vpn_endpoint" {
-  client_cidr_block      = var.vpn_config["client_cidr_block"]
-  server_certificate_arn = var.vpn_config["server_certificate_arn"]
-  split_tunnel           = true
-  authentication_options {
-    type                       = "certificate-authentication"
-    root_certificate_chain_arn = var.vpn_config["root_certificate_chain_arn"]
-  }
-
-  connection_log_options {
-    enabled = false
-  }
-
-  tags = merge(
-    map(
-      "Name", format("%s-vpn-%s", local.vpc_config.name, local.aws_region),
-      "VPC", local.vpc_config.name
-    )
-  )
-}
-
-resource "aws_ec2_client_vpn_network_association" "vpn_network_association" {
-  for_each = toset(module.vpc.private_subnets)
-  lifecycle {
-    //    bug in terraform, it can't preserve the order of the subnet associations so it always tries to recreate them
-    ignore_changes = [subnet_id]
-  }
-  client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.client_vpn_endpoint.id
-  subnet_id              = each.key
-}
-
+//resource "aws_ec2_client_vpn_endpoint" "client_vpn_endpoint" {
+//  client_cidr_block      = var.vpn_config["client_cidr_block"]
+//  server_certificate_arn = var.vpn_config["server_certificate_arn"]
+//  split_tunnel           = true
+//  authentication_options {
+//    type                       = "certificate-authentication"
+//    root_certificate_chain_arn = var.vpn_config["root_certificate_chain_arn"]
+//  }
+//
+//  connection_log_options {
+//    enabled = false
+//  }
+//
+//  tags = merge(
+//    map(
+//      "Name", format("%s-vpn-%s", local.vpc_config.name, local.aws_region),
+//      "VPC", local.vpc_config.name
+//    )
+//  )
+//}
+//
+//resource "aws_ec2_client_vpn_network_association" "vpn_network_association" {
+//  client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.client_vpn_endpoint.id
+//  subnet_id              = module.vpc.public_subnets[0]
+//}
+//
 resource "aws_key_pair" "deployer" {
   key_name   = format("%s-ssh-key-pair", local.vpc_config.name)
   public_key = var.ssh_public_key

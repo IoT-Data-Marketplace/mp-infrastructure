@@ -1,7 +1,9 @@
 resource "helm_release" "kubernetes_dashboard" {
-  count = local.k8s_dashboard.install ? 1 : 0
-  name  = format("%s-kubernetes-dashboard", local.cluster.name)
-  chart = "${path.module}/helm-charts/kubernetes-dashboard"
+  depends_on = [kubernetes_namespace.namespaces]
+  count      = local.k8s_dashboard.install ? 1 : 0
+  name       = format("%s-kubernetes-dashboard", local.cluster.name)
+  chart      = "${path.module}/helm-charts/kubernetes-dashboard"
+  namespace  = "kubernetes-dashboard"
 
   set_string {
     name  = "service.nodePort"

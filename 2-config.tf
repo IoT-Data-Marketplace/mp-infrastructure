@@ -60,10 +60,9 @@ locals {
   }
 
   namespaces = {
-    mp-system = {
-    }
-    mp-logging = {
-    }
+    mp-system            = {}
+    mp-logging           = {}
+    kubernetes-dashboard = {}
   }
 
 }
