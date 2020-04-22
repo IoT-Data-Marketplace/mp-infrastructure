@@ -28,4 +28,17 @@ module "eks_cluster_init" {
 
   namespace_config = local.namespaces
 
+  common_tags = local.common_tags
+  k8s_dashboard_config = {
+    install               = true
+    nodePort              = local.ingress_config.k8s_dashboard_node_port
+    dashboard_domain_name = local.dns_config.k8s_dashboard_domain_name
+  }
+  load_balancer_params = {
+    https_listener_arn = aws_lb_listener.application_lb_https_listener.arn
+    dns_name           = aws_lb.external_application_load_balancer.dns_name
+    zone_id            = aws_lb.external_application_load_balancer.zone_id
+  }
+  route_53_zone_id = local.dns_params.route53_zone_id
+  vpc_id           = module.vpc.vpc_id
 }

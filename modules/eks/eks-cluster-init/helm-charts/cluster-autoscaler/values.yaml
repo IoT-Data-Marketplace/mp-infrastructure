@@ -1,0 +1,11 @@
+replicaCount: 1
+
+clusterName: ""
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

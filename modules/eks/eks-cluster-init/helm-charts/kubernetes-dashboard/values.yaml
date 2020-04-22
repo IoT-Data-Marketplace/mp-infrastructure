@@ -1,0 +1,10 @@
+service:
+  type: NodePort
+  nodePort: ""
+
+resources: {}
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

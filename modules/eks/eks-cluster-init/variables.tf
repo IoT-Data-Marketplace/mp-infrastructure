@@ -31,6 +31,40 @@ variable "eks_additional_user_access" {
   default = []
 }
 
+variable "common_tags" {
+  type = map(string)
+}
+
 variable "namespace_config" {
   type = map(object({}))
+}
+
+variable "k8s_dashboard_config" {
+  type = object({
+    install               = bool
+    nodePort              = number
+    dashboard_domain_name = string
+  })
+}
+
+variable "vpc_id" {}
+
+variable "route_53_zone_id" {}
+
+variable "load_balancer_params" {
+  type = object({
+    https_listener_arn = string
+    dns_name           = string
+    zone_id            = string
+  })
+}
+
+variable "install_metrics_server" {
+  type    = bool
+  default = true
+}
+
+variable "install_cluster_autoscaler" {
+  type    = bool
+  default = true
 }

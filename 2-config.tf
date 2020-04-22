@@ -55,10 +55,14 @@ locals {
     grafana_domain_name           = format("grafana.%s", local.dns_params.base_domain_name)
   }
 
+  ingress_config = {
+    k8s_dashboard_node_port = 30000
+  }
+
   namespaces = {
-    mt-system = {
+    mp-system = {
     }
-    mt-logging = {
+    mp-logging = {
     }
   }
 

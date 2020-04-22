@@ -98,7 +98,7 @@ variable "root_ebs_device_config" {
     delete_on_termination = bool
   })
   default = {
-    volume_size           = 128
+    volume_size           = 8
     volume_type           = "gp2"
     encrypted             = true
     delete_on_termination = true
@@ -129,18 +129,6 @@ variable "asg_config" {
     max_size = number
     min_size = number
   })
-}
-
-variable "cpu_average_config" {
-  description = "CPU Average Utilization Config"
-  type = object({
-    enable      = bool
-    cpu_average = number
-  })
-  default = {
-    enable      = false
-    cpu_average = 0
-  }
 }
 
 variable "additional_tags" {
