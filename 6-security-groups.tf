@@ -53,3 +53,29 @@ module "worker_nodes_sg" {
     }
   }
 }
+
+module "application_lb_sg" {
+  source      = "./modules/security-group"
+  description = "SG Attached to the Application Internet Facing Cluster"
+  sg_name     = format("%s-cluster-application-lb-sg", local.cluster_config.cluster_name)
+  vpc_id      = module.vpc.vpc_id
+  aws_region  = local.aws_region
+  ingress_cidr_block_rules = {
+    http-cluster-access = {
+      from_port = 80
+      to_port   = 80
+      protocol  = "tcp"
+      cidr_blocks = [
+        "0.0.0.0/0"
+      ]
+    }
+    https-cluster-access = {
+      from_port = 443
+      to_port   = 443
+      protocol  = "tcp"
+      cidr_blocks = [
+        "0.0.0.0/0"
+      ]
+    }
+  }
+}
