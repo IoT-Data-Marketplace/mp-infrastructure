@@ -1,10 +1,8 @@
 locals {
-  target_group_list = concat(
-    module.eks_cluster_init.k8s_dashboard_target_group_arn,
-    [
-
-    ]
-  )
+  target_group_list = [
+    aws_alb_target_group.k8s_dashboard_target_group.arn,
+    aws_alb_target_group.grafana_target_group.arn
+  ]
 }
 
 module "spot_worker_group_1" {

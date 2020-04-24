@@ -1,18 +1,21 @@
+resource "kubernetes_namespace" "kubernetes_dashboard" {
+  metadata {
+    name = "kubernetes-dashboard"
+  }
+}
+
 resource "helm_release" "kubernetes_dashboard" {
-  depends_on = [kubernetes_namespace.namespaces]
-  count      = local.k8s_dashboard.install ? 1 : 0
-  name       = format("%s-kubernetes-dashboard", local.cluster.name)
-  chart      = "${path.module}/helm-charts/kubernetes-dashboard"
-  namespace  = "kubernetes-dashboard"
+  name      = format("%s-kubernetes-dashboard", local.cluster_config.cluster_name)
+  chart     = "${path.module}/installation-dependencies/helm-charts/kubernetes-dashboard"
+  namespace = kubernetes_namespace.kubernetes_dashboard.id
 
   set_string {
     name  = "service.nodePort"
-    value = local.k8s_dashboard.nodePort
+    value = local.ingress_config.k8s_dashboard_node_port
   }
 }
 
 resource "kubernetes_cluster_role_binding" "kubernetes_dashboard" {
-  count = local.k8s_dashboard.install ? 1 : 0
   metadata {
     name = "eks-admin"
   }
@@ -29,7 +32,6 @@ resource "kubernetes_cluster_role_binding" "kubernetes_dashboard" {
 }
 
 resource "kubernetes_service_account" "kubernetes_dashboard" {
-  count = local.k8s_dashboard.install ? 1 : 0
   metadata {
     name      = "eks-admin"
     namespace = "kube-system"
@@ -37,56 +39,53 @@ resource "kubernetes_service_account" "kubernetes_dashboard" {
 }
 
 resource "aws_alb_target_group" "k8s_dashboard_target_group" {
-  count    = local.k8s_dashboard.install ? 1 : 0
-  name     = format("%s-dsbrd-tg", local.cluster.name)
-  port     = local.k8s_dashboard.nodePort
+  name     = format("%s-dsbrd-tg", local.cluster_config.cluster_name)
+  port     = local.ingress_config.k8s_dashboard_node_port
   protocol = "HTTPS"
-  vpc_id   = var.vpc_id
+  vpc_id   = module.vpc.vpc_id
 
   health_check {
     enabled             = true
     interval            = 5
     protocol            = "HTTPS"
     path                = "/" // todo add proper path
-    port                = local.k8s_dashboard.nodePort
+    port                = local.ingress_config.k8s_dashboard_node_port
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 2
   }
 
   tags = merge(
-    var.common_tags,
+    local.common_tags,
     map(
-      "Name", format("%s-k8s-dashboard-tg", local.cluster.name)
+      "Name", format("%s-k8s-dashboard-tg", local.cluster_config.cluster_name)
     )
   )
 }
 
 resource "aws_alb_listener_rule" "k8s_dashboard_alb_listener_rule" {
-  count        = local.k8s_dashboard.install ? 1 : 0
-  listener_arn = local.load_balancer_params.https_listener_arn
+  listener_arn = aws_lb_listener.application_lb_https_listener.arn
   action {
     type             = "forward"
-    target_group_arn = element(aws_alb_target_group.k8s_dashboard_target_group.*.arn, count.index)
+    target_group_arn = aws_alb_target_group.k8s_dashboard_target_group.arn
   }
   condition {
     host_header {
       values = [
-        local.k8s_dashboard.dashboard_domain_name
+        local.dns_config.k8s_dashboard_domain_name
       ]
     }
   }
 }
 
 resource "aws_route53_record" "k8s_dashboard_record" {
-  count   = local.k8s_dashboard.install ? 1 : 0
-  zone_id = var.route_53_zone_id
-  name    = local.k8s_dashboard.dashboard_domain_name
+  zone_id = local.dns_params.route53_zone_id
+  name    = local.dns_config.k8s_dashboard_domain_name
   type    = "A"
 
   alias {
-    name                   = local.load_balancer_params.dns_name
-    zone_id                = local.load_balancer_params.zone_id
+    name                   = aws_lb.external_application_load_balancer.dns_name
+    zone_id                = aws_lb.external_application_load_balancer.zone_id
     evaluate_target_health = true
   }
 }

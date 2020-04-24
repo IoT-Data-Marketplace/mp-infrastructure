@@ -98,7 +98,7 @@ variable "root_ebs_device_config" {
     delete_on_termination = bool
   })
   default = {
-    volume_size           = 8
+    volume_size           = 16
     volume_type           = "gp2"
     encrypted             = true
     delete_on_termination = true

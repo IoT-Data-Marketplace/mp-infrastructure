@@ -51,18 +51,25 @@ locals {
   dns_config = {
     cluster_admin_wildcard_domain = format("*.%s", local.dns_params.base_domain_name)
     k8s_dashboard_domain_name     = format("dashboard.%s", local.dns_params.base_domain_name)
+    grafana_domain_name           = format("grafana.%s", local.dns_params.base_domain_name)
     prometheus_domain_name        = format("prometheus.%s", local.dns_params.base_domain_name)
     grafana_domain_name           = format("grafana.%s", local.dns_params.base_domain_name)
   }
 
   ingress_config = {
     k8s_dashboard_node_port = 30000
+    grafana_node_port       = 30010
   }
 
   namespaces = {
-    mp-system            = {}
-    mp-logging           = {}
-    kubernetes-dashboard = {}
+    kafka = {}
   }
+
+  eks_additional_user_access = [
+    {
+      user_arn = aws_iam_user.k8s_user.arn
+      username = "mt-k8s-user"
+    }
+  ]
 
 }

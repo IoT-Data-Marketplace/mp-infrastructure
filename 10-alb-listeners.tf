@@ -36,3 +36,8 @@ resource "aws_lb_listener" "application_lb_https_listener" {
     }
   }
 }
+
+resource "aws_lb_listener_certificate" "wildcard_certificate" {
+  listener_arn    = aws_lb_listener.application_lb_https_listener.arn
+  certificate_arn = aws_acm_certificate.wildcard_certificate.arn
+}

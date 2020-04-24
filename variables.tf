@@ -13,3 +13,12 @@ variable "vpn_config" {
 }
 
 variable "ssh_public_key" {}
+
+variable "eks_additional_access_roles" {
+  description = "Additional Roles with the Cluster Access"
+  type = list(object({
+    role_arn = string
+    username = string
+  }))
+  default = []
+}
