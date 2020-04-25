@@ -27,3 +27,9 @@ resource "aws_iam_user_policy" "k8s_user_policy" {
 }
 EOF
 }
+
+
+resource "aws_iam_user_policy_attachment" "k8s_power_user_policy_attachment" {
+  user       = aws_iam_user.k8s_user.name
+  policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
+}

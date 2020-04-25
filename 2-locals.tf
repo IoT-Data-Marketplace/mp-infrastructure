@@ -62,7 +62,7 @@ locals {
   }
 
   namespaces = {
-    kafka = {}
+    iot-mp-system = {}
   }
 
   eks_additional_user_access = [

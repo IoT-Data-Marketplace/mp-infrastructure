@@ -9,7 +9,7 @@ module "spot_worker_group_1" {
   source                             = "./modules/eks/eks-worker-group"
   worker_group_name                  = "spot-worker-group-1"
   aws_region                         = local.aws_region
-  instance_type                      = "t3.medium"
+  instance_type                      = "t3.large"
   cluster_certificate_authority_data = module.eks_cluster.cluster_certificate_authority_data
   cluster_endpoint                   = module.eks_cluster.cluster_endpoint
   cluster_name                       = local.cluster_config.cluster_name
