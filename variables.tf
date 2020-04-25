@@ -22,3 +22,8 @@ variable "eks_additional_access_roles" {
   }))
   default = []
 }
+
+
+variable "grafana_password" {
+  type = string
+}

@@ -23,7 +23,7 @@ resource "helm_release" "prometheus_operator" {
 
   set_string {
     name  = "grafana.adminPassword"
-    value = "F#C*%]lepwh4;+t*[ZGy$b1qpGo^DF(L"
+    value = var.grafana_password
   }
 }
 
