@@ -1,5 +1,6 @@
 locals {
   target_group_list = [
+    aws_alb_target_group.mp_web_client_target_group.arn,
     aws_alb_target_group.k8s_dashboard_target_group.arn,
     aws_alb_target_group.grafana_target_group.arn
   ]

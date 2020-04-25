@@ -59,6 +59,7 @@ locals {
   ingress_config = {
     k8s_dashboard_node_port = 30000
     grafana_node_port       = 30010
+    mp_web_client_node_port = 30100
   }
 
   namespaces = {
