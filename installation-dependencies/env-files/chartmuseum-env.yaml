@@ -1,0 +1,14 @@
+env:
+  open:
+    STORAGE: "amazon"
+    STORAGE_AMAZON_BUCKET: ${chartmuseum_storage_bucket}
+    STORAGE_AMAZON_PREFIX: ""
+    STORAGE_AMAZON_REGION: ${aws_region}
+    DISABLE_API: false
+  secret:
+    BASIC_AUTH_USER: ${chartmuseum_user}
+    BASIC_AUTH_PASS: ${chartmuseum_password}
+service:
+  servicename:
+  type: NodePort
+  nodePort: ${chartmuseum_node_port}

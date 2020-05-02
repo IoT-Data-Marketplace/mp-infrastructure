@@ -21,6 +21,19 @@ data "aws_iam_policy_document" "worker_nodes_additional_policy_document" {
       "*"
     ]
   }
+
+  statement {
+    sid = "EKSWorkerAdditionalPermissions"
+    actions = [
+      "sts:*",
+      "s3:*",
+    ]
+
+    effect = "Allow"
+    resources = [
+      "*"
+    ]
+  }
 }
 
 resource "aws_iam_role_policy" "worker_nodes_additional_policy" {

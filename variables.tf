@@ -27,3 +27,11 @@ variable "eks_additional_access_roles" {
 variable "grafana_password" {
   type = string
 }
+
+variable "chartmuseum_user" {
+  type = string
+}
+
+variable "chartmuseum_password" {
+  type = string
+}

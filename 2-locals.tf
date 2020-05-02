@@ -54,10 +54,12 @@ locals {
     grafana_domain_name           = format("grafana.%s", local.dns_params.base_domain_name)
     prometheus_domain_name        = format("prometheus.%s", local.dns_params.base_domain_name)
     grafana_domain_name           = format("grafana.%s", local.dns_params.base_domain_name)
+    chartmuseum_domain_name       = format("chartmuseum.%s", local.dns_params.base_domain_name)
   }
 
   ingress_config = {
     k8s_dashboard_node_port = 30000
+    chartmuseum_node_port   = 30001
     grafana_node_port       = 30010
     mp_web_client_node_port = 30100
   }
