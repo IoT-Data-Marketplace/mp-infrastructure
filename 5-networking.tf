@@ -4,10 +4,11 @@ module "vpc" {
 
   name = local.vpc_config.name
 
-  cidr            = local.vpc_config.cidr
-  azs             = slice(data.aws_availability_zones.available_zones.names, 0, 3)
-  private_subnets = local.vpc_config.private_subnets.cidr_blocks
-  public_subnets  = local.vpc_config.public_subnets.cidr_blocks
+  cidr                 = local.vpc_config.cidr
+  azs                  = slice(data.aws_availability_zones.available_zones.names, 0, 3)
+  private_subnets      = local.vpc_config.private_subnets.cidr_blocks
+  public_subnets       = local.vpc_config.public_subnets.cidr_blocks
+  enable_dns_hostnames = true
 
   enable_nat_gateway = true
   single_nat_gateway = true

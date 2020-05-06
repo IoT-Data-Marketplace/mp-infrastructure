@@ -79,3 +79,29 @@ module "application_lb_sg" {
     }
   }
 }
+
+module "rds_db_sg" {
+  source      = "./modules/security-group"
+  description = "SG Attached to the RDS DB"
+  sg_name     = format("%s-rds-db-%s", local.cluster_config.cluster_name, local.aws_region)
+  vpc_id      = module.vpc.vpc_id
+  aws_region  = local.aws_region
+  ingress_cidr_block_rules = {
+    allow-db-access-from-vpc = {
+      from_port = 5432
+      to_port   = 5432
+      protocol  = "tcp"
+      cidr_blocks = [
+        local.vpc_config.cidr
+      ]
+    }
+    allow-db-access-from-tf-executor = {
+      from_port = 5432
+      to_port   = 5432
+      protocol  = "tcp"
+      cidr_blocks = [
+        format("%s/32", chomp(data.http.local_tf_executor_ip.body))
+      ]
+    }
+  }
+}

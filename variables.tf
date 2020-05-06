@@ -35,3 +35,7 @@ variable "chartmuseum_user" {
 variable "chartmuseum_password" {
   type = string
 }
+
+variable "rds_db_password" {
+  type = string
+}
