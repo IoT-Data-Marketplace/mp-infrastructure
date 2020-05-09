@@ -13,6 +13,10 @@ resource "helm_release" "kubernetes_dashboard" {
     name  = "service.nodePort"
     value = local.ingress_config.k8s_dashboard_node_port
   }
+
+  values = [
+    file("${path.module}/installation-dependencies/env-files/node-affinity-app.yaml")
+  ]
 }
 
 resource "kubernetes_cluster_role_binding" "kubernetes_dashboard" {

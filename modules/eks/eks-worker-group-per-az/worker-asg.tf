@@ -1,8 +1,8 @@
 locals {
   subnets = {
     1 = var.subnet_ids[0]
-    //    2 = var.subnet_ids[1] // todo only one subnet for now in order to cut the costs
-    //    3 = var.subnet_ids[2]
+    2 = var.subnet_ids[1]
+    3 = var.subnet_ids[2]
   }
 }
 

@@ -25,6 +25,10 @@ resource "helm_release" "prometheus_operator" {
     name  = "grafana.adminPassword"
     value = var.grafana_password
   }
+
+  values = [
+    file("${path.module}/installation-dependencies/env-files/prometheus-operator-node-affinity-app.yaml")
+  ]
 }
 
 resource "aws_alb_target_group" "grafana_target_group" {

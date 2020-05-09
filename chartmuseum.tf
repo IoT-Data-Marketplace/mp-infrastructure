@@ -25,6 +25,7 @@ resource "helm_release" "chartmuseum" {
   namespace = kubernetes_namespace.chartmuseum.id
 
   values = [
-    data.template_file.chartmuseum_envs.rendered
+    data.template_file.chartmuseum_envs.rendered,
+    file("${path.module}/installation-dependencies/env-files/node-affinity-app.yaml")
   ]
 }
