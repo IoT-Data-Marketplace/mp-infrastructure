@@ -3,7 +3,7 @@ resource "helm_release" "cluster_autoscaler" {
   chart     = "${path.module}/installation-dependencies/helm-charts/cluster-autoscaler"
   namespace = "kube-system"
 
-  set_string {
+  set {
     name  = "clusterName"
     value = local.cluster_config.cluster_name
   }

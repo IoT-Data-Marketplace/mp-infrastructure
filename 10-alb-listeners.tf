@@ -23,7 +23,7 @@ resource "aws_lb_listener" "application_lb_https_listener" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_alb_target_group.mp_web_client_target_group.arn
+    target_group_arn = aws_alb_target_group.istio_ingress_gateway_tg.arn
   }
 }
 

@@ -66,7 +66,11 @@ locals {
   }
 
   namespaces = {
-    iot-mp-system = {}
+    iot-mp-system = {
+      labels = {
+        istio-injection = "enabled"
+      }
+    }
   }
 
   eks_additional_user_access = [

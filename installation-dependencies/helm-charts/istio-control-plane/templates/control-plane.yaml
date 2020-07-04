@@ -1,0 +1,18 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: istio-control-plane
+spec:
+  profile: demo # https://istio.io/latest/docs/setup/additional-setup/config-profiles/
+  values:
+    gateways:
+      istio-ingressgateway:
+        type: NodePort
+        ports:
+          - name: http2
+            port: 80
+            targetPort: 8080
+            nodePort: 31245
+
+  # https://archive.istio.io/v1.4/docs/reference/config/installation-options/#gateways-options
