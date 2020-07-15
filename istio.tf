@@ -25,4 +25,9 @@ resource "helm_release" "istio_control_plane" {
   chart     = "${path.module}/installation-dependencies/helm-charts/istio-control-plane"
   name      = "istio-control-plane"
   namespace = kubernetes_namespace.istio_system_namespace.id
+
+  set {
+    name  = "ingressGatewayNodePort"
+    value = local.ingress_config.istio_ingress_gateway_node_port
+  }
 }

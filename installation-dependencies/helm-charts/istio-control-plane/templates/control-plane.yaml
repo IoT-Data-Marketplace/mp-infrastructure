@@ -9,10 +9,37 @@ spec:
     gateways:
       istio-ingressgateway:
         type: NodePort
-        ports:
-          - name: http2
-            port: 80
-            targetPort: 8080
-            nodePort: 31245
+  addonComponents:
+    tracing:
+      enabled: false
+  components:
+    egressGateways:
+      - enabled: false
+    ingressGateways:
+      - enabled: true
+        k8s:
+          service:
+            ports:
+              - name: status-port
+                port: 15020
+                targetPort: 15020
+                nodePort: 30300
+              - name: http2
+                port: 80
+                targetPort: 8080
+                nodePort: {{ required "A valid .Values.ingressGatewayNodePort entry required!" .Values.ingressGatewayNodePort }}
+              - name: https
+                port: 443
+                targetPort: 8443
+                nodePort: 30302
+              - name: tcp
+                port: 31400
+                targetPort: 31400
+                nodePort: 30303
+              - name: tls
+                port: 15443
+                targetPort: 15443
+                nodePort: 30304
+
 
   # https://archive.istio.io/v1.4/docs/reference/config/installation-options/#gateways-options

@@ -73,7 +73,7 @@ resource "aws_alb_target_group" "chartmuseum_target_group" {
 
 resource "aws_alb_target_group" "istio_ingress_gateway_tg" {
   name     = format("%s-istio-tg", local.cluster_config.cluster_name)
-  port     = 31245
+  port     = local.ingress_config.istio_ingress_gateway_node_port
   protocol = "HTTP"
   vpc_id   = module.vpc.vpc_id
 
@@ -81,8 +81,8 @@ resource "aws_alb_target_group" "istio_ingress_gateway_tg" {
     enabled             = true
     interval            = 5
     protocol            = "HTTP"
-    path                = "/"
-    port                = 31245
+    path                = "/healthz/ready"
+    port                = local.ingress_config.istio_ingress_gateway_node_port
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 2
@@ -91,7 +91,7 @@ resource "aws_alb_target_group" "istio_ingress_gateway_tg" {
   tags = merge(
     local.common_tags,
     map(
-      "Name", format("%s-istio-tg", local.cluster_config.cluster_name)
+      "Name", format("%s-ing-gtw-tg", local.cluster_config.cluster_name)
     )
   )
 }
