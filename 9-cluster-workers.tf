@@ -1,6 +1,8 @@
 locals {
   target_group_list = [
     aws_alb_target_group.istio_ingress_gateway_tg.arn,
+    aws_alb_target_group.mp_web_client_target_group.arn,
+    aws_alb_target_group.mp_api_gateway_target_group.arn,
     aws_alb_target_group.chartmuseum_target_group.arn,
     aws_alb_target_group.k8s_dashboard_target_group.arn,
     aws_alb_target_group.grafana_target_group.arn
@@ -11,7 +13,7 @@ module "spot_worker_group_1" {
   source                             = "./modules/eks/eks-worker-group"
   worker_group_name                  = "spot-worker-group-1"
   aws_region                         = local.aws_region
-  instance_type                      = "t3.large"
+  instance_type                      = "m5.large"
   cluster_certificate_authority_data = module.eks_cluster.cluster_certificate_authority_data
   cluster_endpoint                   = module.eks_cluster.cluster_endpoint
   cluster_name                       = local.cluster_config.cluster_name
@@ -63,7 +65,7 @@ module "kafka_spot_worker_group_t3_medium" {
     spot_allocation_strategy = "lowest-price"
     spot_instance_pools      = 2
   }
-  target_group_arns  = local.target_group_list
+  target_group_arns  = []
   ebs_optimized      = true
   kubelet_extra_args = "--node-labels=nodegroup=kafka"
   additional_tags = {

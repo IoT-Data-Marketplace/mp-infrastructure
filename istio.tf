@@ -30,4 +30,9 @@ resource "helm_release" "istio_control_plane" {
     name  = "ingressGatewayNodePort"
     value = local.ingress_config.istio_ingress_gateway_node_port
   }
+
+  set {
+    name  = "ingressGatewayHealthStatusNodePort"
+    value = local.ingress_config.istio_ingress_gateway_health_status_node_port
+  }
 }

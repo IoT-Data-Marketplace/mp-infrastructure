@@ -11,19 +11,19 @@ spec:
         type: NodePort
   addonComponents:
     tracing:
-      enabled: false
+      enabled: true
   components:
     egressGateways:
       - enabled: false
     ingressGateways:
-      - enabled: true
+      - enabled: false
         k8s:
           service:
             ports:
               - name: status-port
                 port: 15020
                 targetPort: 15020
-                nodePort: 30300
+                nodePort: {{ required "A valid .Values.ingressGatewayNodePort entry required!" .Values.ingressGatewayNodePort }}
               - name: http2
                 port: 80
                 targetPort: 8080

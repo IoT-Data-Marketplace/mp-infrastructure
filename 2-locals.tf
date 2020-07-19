@@ -58,10 +58,13 @@ locals {
   }
 
   ingress_config = {
-    k8s_dashboard_node_port         = 30000
-    chartmuseum_node_port           = 30001
-    grafana_node_port               = 30010
-    istio_ingress_gateway_node_port = 30111
+    iot_mp_api_gateway_node_port                  = 30444
+    iot_mp_web_client_node_port                   = 30445
+    k8s_dashboard_node_port                       = 30000
+    chartmuseum_node_port                         = 30001
+    grafana_node_port                             = 30010
+    istio_ingress_gateway_node_port               = 30111
+    istio_ingress_gateway_health_status_node_port = 30300
   }
 
   namespaces = {
