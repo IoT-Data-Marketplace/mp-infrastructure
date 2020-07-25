@@ -26,6 +26,6 @@ resource "helm_release" "chartmuseum" {
 
   values = [
     data.template_file.chartmuseum_envs.rendered,
-    file("${path.module}/installation-dependencies/env-files/node-affinity-app.yaml")
+    file("${path.module}/installation-dependencies/env-files/node-affinity-kube-system.yaml")
   ]
 }

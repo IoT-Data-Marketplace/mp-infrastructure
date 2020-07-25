@@ -15,7 +15,7 @@ resource "helm_release" "kubernetes_dashboard" {
   }
 
   values = [
-    file("${path.module}/installation-dependencies/env-files/node-affinity-app.yaml")
+    file("${path.module}/installation-dependencies/env-files/node-affinity-kube-system.yaml")
   ]
 }
 

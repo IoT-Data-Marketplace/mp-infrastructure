@@ -27,7 +27,7 @@ resource "helm_release" "prometheus_operator" {
   }
 
   values = [
-    file("${path.module}/installation-dependencies/env-files/prometheus-operator-node-affinity-app.yaml")
+    file("${path.module}/installation-dependencies/env-files/prometheus-operator-node-affinity-kube-system.yaml")
   ]
 }
 

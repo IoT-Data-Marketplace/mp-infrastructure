@@ -6,4 +6,4 @@ affinity:
             - key: nodegroup
               operator: In
               values:
-                - app
+                - kube-system
