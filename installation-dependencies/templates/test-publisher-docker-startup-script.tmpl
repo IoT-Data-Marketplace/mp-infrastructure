@@ -1,0 +1,29 @@
+function startPublishing() {
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_1_address} --env JWT=${sensor_1_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_2_address} --env JWT=${sensor_2_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_3_address} --env JWT=${sensor_3_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_4_address} --env JWT=${sensor_4_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_5_address} --env JWT=${sensor_5_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_6_address} --env JWT=${sensor_6_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_7_address} --env JWT=${sensor_7_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_8_address} --env JWT=${sensor_8_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_9_address} --env JWT=${sensor_9_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_10_address} --env JWT=${sensor_10_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_11_address} --env JWT=${sensor_11_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_12_address} --env JWT=${sensor_12_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_13_address} --env JWT=${sensor_13_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_14_address} --env JWT=${sensor_14_jwt} ddanijeld/mp-test-publisher-client:latest
+  docker run -d --restart=always --env SENSOR_ADDRESS=${sensor_15_address} --env JWT=${sensor_15_jwt} ddanijeld/mp-test-publisher-client:latest
+}
+
+
+startPublishing
+startPublishing
+startPublishing
+startPublishing
+startPublishing
+startPublishing
+startPublishing
+startPublishing
+startPublishing
+startPublishing

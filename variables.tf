@@ -39,3 +39,25 @@ variable "chartmuseum_password" {
 variable "rds_db_password" {
   type = string
 }
+
+variable "test_instances_config" {
+  type = object({
+    publishers = object({
+      instance_type  = string
+      instance_count = number
+      startup_data_config = map(object({
+        address = string
+        jwt     = string
+      }))
+    })
+    subscribers = object({
+      instance_type  = string
+      instance_count = number
+      startup_data_config = map(object({
+        address        = string
+        entity_jwt     = string
+        entity_address = string
+      }))
+    })
+  })
+}

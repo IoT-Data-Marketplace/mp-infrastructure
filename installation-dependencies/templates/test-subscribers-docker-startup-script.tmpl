@@ -1,0 +1,29 @@
+function startPulling() {
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_1_address} --env SENSOR_ADDRESS=${sensor_1_address} --env JWT=${entity_1_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_2_address} --env SENSOR_ADDRESS=${sensor_2_address} --env JWT=${entity_2_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_3_address} --env SENSOR_ADDRESS=${sensor_3_address} --env JWT=${entity_3_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_4_address} --env SENSOR_ADDRESS=${sensor_4_address} --env JWT=${entity_4_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_5_address} --env SENSOR_ADDRESS=${sensor_5_address} --env JWT=${entity_5_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_6_address} --env SENSOR_ADDRESS=${sensor_6_address} --env JWT=${entity_6_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_7_address} --env SENSOR_ADDRESS=${sensor_7_address} --env JWT=${entity_7_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_8_address} --env SENSOR_ADDRESS=${sensor_8_address} --env JWT=${entity_8_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_9_address} --env SENSOR_ADDRESS=${sensor_9_address} --env JWT=${entity_9_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_10_address} --env SENSOR_ADDRESS=${sensor_10_address} --env JWT=${entity_10_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_11_address} --env SENSOR_ADDRESS=${sensor_11_address} --env JWT=${entity_11_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_12_address} --env SENSOR_ADDRESS=${sensor_12_address} --env JWT=${entity_12_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_13_address} --env SENSOR_ADDRESS=${sensor_13_address} --env JWT=${entity_13_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_14_address} --env SENSOR_ADDRESS=${sensor_14_address} --env JWT=${entity_14_jwt} ddanijeld/mp-test-subscriber-client:latest
+  docker run -d --restart=always --env ENTITY_ADDRESS=${entity_15_address} --env SENSOR_ADDRESS=${sensor_15_address} --env JWT=${entity_15_jwt} ddanijeld/mp-test-subscriber-client:latest
+}
+
+
+startPulling
+startPulling
+startPulling
+startPulling
+startPulling
+startPulling
+startPulling
+startPulling
+startPulling
+startPulling
