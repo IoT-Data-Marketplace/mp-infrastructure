@@ -29,4 +29,4 @@ prometheus:
               - key: nodegroup
                 operator: In
                 values:
-                  - kube-system
+                  - prometheus

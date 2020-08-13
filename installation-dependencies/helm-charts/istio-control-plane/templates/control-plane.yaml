@@ -9,6 +9,12 @@ spec:
     global:
       defaultNodeSelector:
         nodegroup: istio
+    grafana:
+      nodeSelector:
+        nodegroup: prometheus
+    prometheus:
+      nodeSelector:
+        nodegroup: prometheus
     gateways:
       istio-ingressgateway:
         type: NodePort

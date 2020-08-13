@@ -8,20 +8,20 @@ resource "helm_release" "prometheus_operator" {
   name       = format("%s-prometheus", local.cluster_config.cluster_name)
   repository = data.helm_repository.stable.metadata[0].url
   chart      = "prometheus-operator"
-  version    = "8.13.2"
+  version    = "9.3.1"
   namespace  = kubernetes_namespace.prometheus_oporator.id
 
-  set_string {
+  set {
     name  = "grafana.service.type"
     value = "NodePort"
   }
 
-  set_string {
+  set {
     name  = "grafana.service.nodePort"
     value = local.ingress_config.grafana_node_port
   }
 
-  set_string {
+  set_sensitive {
     name  = "grafana.adminPassword"
     value = var.grafana_password
   }

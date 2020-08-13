@@ -1,6 +1,6 @@
 locals {
 
-  aws_region = "eu-central-1"
+  aws_region = var.aws_region
 
   cluster_config = {
     cluster_name           = "iot-data-mp"
@@ -44,8 +44,8 @@ locals {
   }
 
   dns_params = {
-    base_domain_name = "iot-data-mp.com"
-    route53_zone_id  = "Z0309573B5CCF4IK8GYQ"
+    base_domain_name = var.dns_params.base_domain_name
+    route53_zone_id  = var.dns_params.route53_zone_id
   }
 
   dns_config = {
